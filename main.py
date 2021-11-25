@@ -32,7 +32,7 @@ def main():
                     print(zoom_X,zoom_Y,zoom_H,zoom_W)
                 if event.button == 4:
                    zoom_H -= 12
-                   zoom_W -=12
+                   zoom_W -=10
                    print(zoom_X,zoom_Y,zoom_H,zoom_W)
                 if event.button == 5:
                    zoom_W += 12
