@@ -1,6 +1,6 @@
 import sys,pygame
 
-window_size = window_width, window_height = 1000,700
+window_size = window_width, window_height = 1000,1000
 grid_size = grid_width, grid_height = 3000,3000
 window_color = (20,20,20)
 grid_color = (200,200,200)
