@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="cell_logic.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="displaywindow.py">
       <SubType>Code</SubType>
     </Compile>

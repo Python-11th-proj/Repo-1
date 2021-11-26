@@ -1,26 +1,35 @@
 import sys,pygame
 
+#dimensions of display window, background grid
 window_size = window_width, window_height = 1000,1000
 grid_size = grid_width, grid_height = 3000,3000
+#colors for various elements
 window_color = (50,50,50)
 grid_color = (20,20,20)
-cell_color = (255,255,255)
+cell_color = (230,230,230)
 
-def main():
+cells_added = [] #list to track rect value of all added cells
+
+from cell_logic import *
+
+def game():
     global grid,window,yes
 
-    pygame.init()
+    pygame.init() 
     
-    window = pygame.display.set_mode(window_size,pygame.SRCALPHA)
-    window_rect = window.get_rect()
-    grid = pygame.Surface(grid_size)
+    window = pygame.display.set_mode(window_size,pygame.SRCALPHA) #making the display surface and making it transparent
+    window_rect = window.get_rect() #getting rect(x,y,w,h) cords of the display surface
+    grid = pygame.Surface(grid_size) #making grid surface
     grid.fill(window_color)
 
-    drawGrid()
-    zoom_X,zoom_Y,zoom_W,zoom_H = 750,750,500,500
+    drawGrid() #draws a grid of squares of side 20
+    zoom_X,zoom_Y,zoom_W,zoom_H = 750,750,500,500 #starting rect value of zoom surface
+
     add_cells = "y"
+    
 
     while True:
+        #checks for various events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -32,15 +41,16 @@ def main():
                     zoom_W = 1400
                     print(zoom_X,zoom_Y,zoom_H,zoom_W)
                 if event.button == 4:
-                   zoom_H -= 12
-                   zoom_W -=12
-                   print(zoom_X,zoom_Y,zoom_H,zoom_W)
+                    zoom_H -= 12
+                    zoom_W -=12
+                    print(zoom_X,zoom_Y,zoom_H,zoom_W)
                 if event.button == 5:
-                   zoom_W += 12
-                   zoom_H += 12
-                   print(zoom_X,zoom_Y,zoom_H,zoom_W)
+                    zoom_W += 12
+                    zoom_H += 12
+                    print(zoom_X,zoom_Y,zoom_H,zoom_W)
 
             if event.type == pygame.KEYDOWN:
+                #bounding limits
                 if zoom_Y == 18:
                     zoom_Y = 30
                 if zoom_Y == 1554:
@@ -49,6 +59,7 @@ def main():
                     zoom_X = 30
                 if zoom_X == 1554:
                     zoom_X = 1542
+                #movement
                 if event.key == pygame.K_w:
                     zoom_Y -= 12
                     print(zoom_X,zoom_Y,zoom_H,zoom_W)
@@ -62,12 +73,12 @@ def main():
                     zoom_X += 12
                     print(zoom_X,zoom_Y,zoom_H,zoom_W)
 
-        zoom(zoom_X,zoom_Y,zoom_W,zoom_H)
-        window.blit(pygame.transform.scale(zoom_grid,window_rect.size),(0,0))
-        pygame.display.flip()
+        zoom(zoom_X,zoom_Y,zoom_W,zoom_H) #creates zoom subsurface on grid surface
+        window.blit(pygame.transform.scale(zoom_grid,window_rect.size),(0,0)) #scales zoom subsurface to window size
+        pygame.display.flip() #updates the display
         
         if add_cells == "y":
-            drawCells()
+            drawCells_manual()
             x = input("do you want to continue? y/n:\n")
             if x == "n":
                 add_cells = "n"
@@ -87,8 +98,9 @@ def drawGrid():
             rect = pygame.Rect(x*boxsize,y*boxsize,boxsize,boxsize)
             pygame.draw.rect(grid,grid_color,rect,1)
 
-def drawCells():
-    cords = input("enter co-ords x,y(multiples of 20):\n")
+def drawCells_manual():
+    print("Starting co-ords are 1000,1000")
+    cords = input("Enter co-ords x,y(multiples of 20):\n")
     cord_split = cords.split(",")
     cord_x = int(cord_split[0])
     cord_y = int(cord_split[1])
@@ -97,6 +109,7 @@ def drawCells():
         cord_x=-10
         cord_y=-10
     cell_rect = pygame.Rect((cord_x,cord_y),(20,20))
-    print(cell_rect)
     pygame.draw.rect(grid,cell_color,cell_rect)
     pygame.draw.rect(grid,grid_color,cell_rect,1)
+    cells_added.append(cell_rect)
+    print(cells_added)

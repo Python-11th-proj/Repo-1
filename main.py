@@ -1,3 +1,3 @@
 from displaywindow import *
 
-main()
+game()
