@@ -2,8 +2,9 @@ import sys,pygame
 
 window_size = window_width, window_height = 1000,1000
 grid_size = grid_width, grid_height = 3000,3000
-window_color = (20,20,20)
-grid_color = (200,200,200)
+window_color = (50,50,50)
+grid_color = (20,20,20)
+cell_color = (255,255,255)
 
 def main():
     global grid,window
@@ -17,6 +18,7 @@ def main():
 
     drawGrid()
     zoom_X,zoom_Y,zoom_W,zoom_H = 750,750,500,500
+    
 
     while True:
 
@@ -72,6 +74,7 @@ def zoom(zoom_X,zoom_Y,zoom_W,zoom_H):
     zoom_grid.set_colorkey((0,0,0))
     
 def drawGrid():
+    global boxsize
     boxsize = 20
     for x in range(grid_width//boxsize):
         for y in range(grid_height//boxsize):
