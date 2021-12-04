@@ -98,6 +98,7 @@ def game():
                     pygame.draw.rect(window,window_color,rect)
                     pygame.draw.rect(window,grid_color,rect,1)
                     while phase1:
+                        clock.tick(150)
                         for event in pygame.event.get():
                             if event.type == pygame.QUIT:
                                 pygame.quit()
