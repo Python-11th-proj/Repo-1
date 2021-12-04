@@ -1,6 +1,6 @@
 import sys,pygame,time
 
-window_size = window_width, window_height = 1000,1000 #dimensions of display window
+window_size = window_width, window_height = 1800,900 #dimensions of display window
 
 #colors for various elements
 window_color = (50,50,50)
