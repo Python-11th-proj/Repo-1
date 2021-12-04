@@ -50,7 +50,6 @@ def cell_sim(rect,cells_added,boxsize):
                 cell_state.append(0)
 
 def cell_changes(rect,cells_added,boxsize,window_copy,cell_color,window_color,window):
-    generations = 0
     birthed_cells = []
     removed_cells = []
     cell_sim(rect,cells_added,boxsize)
@@ -73,7 +72,7 @@ def cell_changes(rect,cells_added,boxsize,window_copy,cell_color,window_color,wi
     cells_added.extend(birthed_cells)
     for elem in removed_cells:
         cells_added.remove(elem)
-    generations += 1
+
 
 
 
