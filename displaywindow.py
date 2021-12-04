@@ -109,7 +109,7 @@ def game():
                         time.sleep(0.1)
                     
         window.blit(window_copy,window_rect) #displays window_copy on the display window
-        window.blit(update_fps(font), (10,0)) #displays the fps
+        window.blit(update_fps(font),(10,0)) #displays the fps
         pygame.display.flip() #updates the display
      
 
