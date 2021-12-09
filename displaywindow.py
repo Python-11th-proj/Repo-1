@@ -62,8 +62,6 @@ def game():
     drawGrid(grid_rect) #draws the grid
     grid_no = 1
 
-
-
     phase1 = True
 
     while phase1:
@@ -114,7 +112,7 @@ def game():
                         window.blit(window_copy,window_rect) #displays window_copy on the display window
                         window.blit(update_fps(font),(10,0)) #displays the fps
                         pygame.display.flip() #updates the display
-                        time.sleep(0.2)
+                        time.sleep(0.3)
 
                 if event.key == pygame.K_BACKSLASH:
                     # defining snake default position

@@ -45,17 +45,16 @@ def cell_sim(rect,cells_added,boxsize):
             cell_state.append(0)
         elif cells_around >= 4: #more than or equal to 4 cells = cell dead (0)
             cell_state.append(0)
-        elif cells_around == 2 or cells_around == 3: #cell has 2 or 3 live cells = cell survives/gets born (1/2)
-            if cells_around == 2:
-                if rect[elem] in cells_added:
-                    cell_state.append(1)
-                else:
-                    cell_state.append(0)
-            elif cells_around == 3:
-                if rect[elem] in cells_added:
-                    cell_state.append(1)
-                else:
-                    cell_state.append(2)
+        elif cells_around == 2:
+            if rect[elem] in cells_added:
+                cell_state.append(1)
+            else:
+                cell_state.append(0)
+        elif cells_around == 3:
+            if rect[elem] in cells_added:
+                cell_state.append(1)
+            else:
+                cell_state.append(2)
 
 def cell_changes(rect,cells_added,boxsize,window_copy,cell_color,window_color,window):
     birthed_cells = [] #list to track all born cells
@@ -75,8 +74,6 @@ def cell_changes(rect,cells_added,boxsize,window_copy,cell_color,window_color,wi
                 removed_cells.append(rect[elem])
             else:
                 pass
-        elif cell_state[elem] == 1:
-            pass
 
     cells_added.extend(birthed_cells)
     for elem in removed_cells:
