@@ -112,7 +112,7 @@ def game():
                         window.blit(window_copy,window_rect) #displays window_copy on the display window
                         window.blit(update_fps(font),(10,0)) #displays the fps
                         pygame.display.flip() #updates the display
-                        time.sleep(0.3)
+                        time.sleep(0.1)
 
                 if event.key == pygame.K_BACKSLASH:
                     # defining snake default position
