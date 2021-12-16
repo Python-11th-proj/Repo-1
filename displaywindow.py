@@ -8,21 +8,17 @@ grid_color = (20,20,20)
 cell_color = (230,230,230)
 
 cells_added = [] #list to track added cells
-grid_rect = [] #list to track all cells in the grid
 
 from cell_logic import *
 
 
-def drawGrid(grid_rect): #draws the grid and saves all the rects to grid_rect
+def drawGrid(): #draws the grid and saves all the rects to grid_rect
     for x in range(window_width//boxsize):
         for y in range(window_height//boxsize):
             rect = pygame.Rect(x*boxsize,y*boxsize,boxsize,boxsize)
             pygame.draw.rect(window,window_color,rect)
             pygame.draw.rect(window,grid_color,rect,1)
-            if grid_no == 0:
-                grid_rect.append(rect)
-            else:
-                pass
+
   
 def cursor_hover():
     global rect
@@ -30,8 +26,8 @@ def cursor_hover():
     #gets the co-ordinate of the top left corner of the nearest square based on mouse position
     nearest_x = (mouse_x//boxsize)*boxsize
     nearest_y = (mouse_y//boxsize)*boxsize
-    drawGrid(grid_rect) #draw the grid everytime to remove cursor trail/(slow) optimization needed
     rect = pygame.Rect(nearest_x,nearest_y,boxsize,boxsize)
+    drawGrid()
     pygame.draw.rect(window,cell_color,rect)
     
 def update_fps(font):
@@ -58,9 +54,7 @@ def game():
 
     font = pygame.font.SysFont("Arial", 18) #font for the fps counter
 
-    grid_no = 0
-    drawGrid(grid_rect) #draws the grid
-    grid_no = 1
+    drawGrid() #draws the grid
 
     phase1 = True
 
@@ -103,15 +97,13 @@ def game():
 
                     #starts the simulation
                     while phase1:
-                        clock.tick(150)
                         for event in pygame.event.get():
                             if event.type == pygame.QUIT:
                                 pygame.quit()
                                 sys.exit()
                         cell_changes(cells_added,boxsize,window_copy,cell_color,window_color,window)
                         window.blit(window_copy,window_rect) #displays window_copy on the display window
-                        window.blit(update_fps(font),(10,0)) #displays the fps
-                        pygame.display.flip() #updates the display
+                        pygame.display.update() #updates the display
                         #time.sleep(0.3)
 
                 if event.key == pygame.K_BACKSLASH:
