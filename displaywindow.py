@@ -1,6 +1,6 @@
 import sys,pygame,time,random
 
-window_size = window_width, window_height = 1800,900 #dimensions of display window
+window_size = window_width, window_height = 1800,990 #dimensions of display window
 
 #colors for various elements
 window_color = (50,50,50)
@@ -97,15 +97,13 @@ def game():
 
                     #starts the simulation
                     while phase1:
-                        clock.tick(150)
                         for event in pygame.event.get():
                             if event.type == pygame.QUIT:
                                 pygame.quit()
                                 sys.exit()
                         cell_changes(cells_added,boxsize,window_copy,cell_color,window_color,window)
                         window.blit(window_copy,window_rect) #displays window_copy on the display window
-                        window.blit(update_fps(font),(10,0)) #displays the fps
-                        pygame.display.flip() #updates the display
+                        pygame.display.update() #updates the display
                         #time.sleep(0.3)
 
                 if event.key == pygame.K_BACKSLASH:
