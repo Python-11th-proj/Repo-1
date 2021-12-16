@@ -45,9 +45,9 @@ def cell_sim(rect,cells_added,boxsize):
             cell_state.append(0)
         elif cells_around >= 4: #more than or equal to 4 cells = cell dead (0)
             cell_state.append(0)
-        elif cells_around == 2:
-            if rect[elem] in cells_added:
-                cell_state.append(1)
+        elif cells_around == 2: #2 cells around = cell alive (2)
+            if rect[elem] in cells_added: #checks if the currently checked cell is an alive or dead cell
+                cell_state.append(1) 
             else:
                 cell_state.append(0)
         elif cells_around == 3:
