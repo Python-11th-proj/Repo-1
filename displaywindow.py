@@ -50,7 +50,7 @@ def game():
     window_copy.set_colorkey(window_color) #makes the copy window transparent
 
     add_cells = "y"
-    boxsize = 10 #size of the cells in the grid
+    boxsize = 30 #size of the cells in the grid
 
     font = pygame.font.SysFont("Arial", 18) #font for the fps counter
 
@@ -117,7 +117,7 @@ def game():
                                     [60, 90]
                                    ]
                     # fruit position
-                    fruit_position = [random.randrange(0, (1800//boxsize)) * 30,random.randrange(0, (800//boxsize)) * boxsize]
+                    fruit_position = [random.randrange(0, (1800//boxsize)) * 30,random.randrange(0, (900//boxsize)) * boxsize]
                     fruit_spawn = True
  
                     # setting default snake direction right
