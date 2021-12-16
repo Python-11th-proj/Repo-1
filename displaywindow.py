@@ -54,7 +54,7 @@ def game():
     window_copy.set_colorkey(window_color) #makes the copy window transparent
 
     add_cells = "y"
-    boxsize = 30 #size of the cells in the grid
+    boxsize = 10 #size of the cells in the grid
 
     font = pygame.font.SysFont("Arial", 18) #font for the fps counter
 
@@ -108,11 +108,11 @@ def game():
                             if event.type == pygame.QUIT:
                                 pygame.quit()
                                 sys.exit()
-                        cell_changes(grid_rect,cells_added,boxsize,window_copy,cell_color,window_color,window)
+                        cell_changes(cells_added,boxsize,window_copy,cell_color,window_color,window)
                         window.blit(window_copy,window_rect) #displays window_copy on the display window
                         window.blit(update_fps(font),(10,0)) #displays the fps
                         pygame.display.flip() #updates the display
-                        time.sleep(0.3)
+                        #time.sleep(0.3)
 
                 if event.key == pygame.K_BACKSLASH:
                     # defining snake default position
