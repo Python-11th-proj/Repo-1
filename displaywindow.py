@@ -50,7 +50,7 @@ def game():
     window_copy.set_colorkey(window_color) #makes the copy window transparent
 
     add_cells = "y"
-    boxsize = 30 #size of the cells in the grid
+    boxsize = 10 #size of the cells in the grid
 
     font = pygame.font.SysFont("Arial", 18) #font for the fps counter
 
