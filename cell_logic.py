@@ -122,7 +122,6 @@ def cell_sim(cells_added,boxsize):
 
     cells_added.extend(birthed_cells)
 
-
 def cell_changes(cells_added,boxsize,window_copy,cell_color,window_color,window):
     removed_cells = [] #list to track all removed cells
     cell_sim(cells_added,boxsize)

@@ -1,5 +1,7 @@
 import sys,pygame,time,random
 
+global grid_rects,window_color,grid_color,cell_color
+
 window_size = window_width, window_height = 1800,900 #dimensions of display window
 
 #colors for various elements
@@ -8,6 +10,7 @@ grid_color = (20,20,20)
 cell_color = (230,230,230)
 
 cells_added = [] #list to track added cells
+grid_rects = []
 
 from cell_logic import *
 
@@ -16,6 +19,7 @@ def drawGrid(): #draws the grid and saves all the rects to grid_rect
     for x in range(window_width//boxsize):
         for y in range(window_height//boxsize):
             rect = pygame.Rect(x*boxsize,y*boxsize,boxsize,boxsize)
+            grid_rects.append(rect)
             pygame.draw.rect(window,window_color,rect)
             pygame.draw.rect(window,grid_color,rect,1)
 
@@ -27,8 +31,12 @@ def cursor_hover():
     nearest_x = (mouse_x//boxsize)*boxsize
     nearest_y = (mouse_y//boxsize)*boxsize
     rect = pygame.Rect(nearest_x,nearest_y,boxsize,boxsize)
-    drawGrid()
-    pygame.draw.rect(window,cell_color,rect)
+    for elem in grid_rects:
+        if elem.colliderect(rect):
+            pygame.draw.rect(window,cell_color,elem)
+        else:
+            pygame.draw.rect(window,window_color,elem)
+            pygame.draw.rect(window,grid_color,elem,1)
     
 def update_fps(font):
 	fps = str(int(clock.get_fps()))
@@ -50,7 +58,7 @@ def game():
     window_copy.set_colorkey(window_color) #makes the copy window transparent
 
     add_cells = "y"
-    boxsize = 10 #size of the cells in the grid
+    boxsize = 30 #size of the cells in the grid
 
     font = pygame.font.SysFont("Arial", 18) #font for the fps counter
 
@@ -97,6 +105,7 @@ def game():
 
                     #starts the simulation
                     while phase1:
+                        tic = time.perf_counter()
                         for event in pygame.event.get():
                             if event.type == pygame.QUIT:
                                 pygame.quit()
@@ -104,6 +113,8 @@ def game():
                         cell_changes(cells_added,boxsize,window_copy,cell_color,window_color,window)
                         window.blit(window_copy,window_rect) #displays window_copy on the display window
                         pygame.display.update() #updates the display
+                        toc = time.perf_counter()
+                        print(f"Generations per second = {1/(toc-tic)}")
                         #time.sleep(0.3)
 
                 if event.key == pygame.K_BACKSLASH:
