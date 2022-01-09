@@ -1,6 +1,6 @@
 import sys,pygame,time,random
 
-global grid_rects,window_color,grid_color,cell_color
+global grid_rects,window_color,grid_color,cell_color,cells_added
 
 window_size = window_width, window_height = 1800,900 #dimensions of display window
 
@@ -23,7 +23,6 @@ def drawGrid(): #draws the grid and saves all the rects to grid_rect
             pygame.draw.rect(window,window_color,rect)
             pygame.draw.rect(window,grid_color,rect,1)
 
-  
 def cursor_hover():
     global rect
     mouse_x,mouse_y = pygame.mouse.get_pos()
@@ -56,18 +55,19 @@ def game():
     window_copy = window.copy() #makes an identical copy of the display surface 
     window_copy.fill(window_color)
     window_copy.set_colorkey(window_color) #makes the copy window transparent
-
-    add_cells = "y"
-    boxsize = 30 #size of the cells in the grid
+ 
+    boxsize = 10 #size of the cells in the grid
 
     font = pygame.font.SysFont("Arial", 18) #font for the fps counter
 
     drawGrid() #draws the grid
 
-    phase1 = True
+    gameloop = True
 
-    while phase1:
+    while gameloop:
         clock.tick(150) #the fps
+        simloop = False
+        add_cells = True
         #checks for various events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -75,7 +75,7 @@ def game():
                 sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if add_cells == 'y' or 'yes':
+                if add_cells:
                     #draws a cell on the square at the current mouse position
                     if event.button == 1: #left click
                         pygame.draw.rect(window_copy,cell_color,rect)
@@ -88,7 +88,7 @@ def game():
                         cells_added.remove(rect)
 
             if event.type == pygame.MOUSEMOTION: #called when the mouse is moved
-                if add_cells == 'y':
+                if add_cells:
                     cursor_hover()
                 else:
                     #redraws the last cell after mouse hover is stopped
@@ -98,25 +98,39 @@ def game():
             if event.type == pygame.KEYDOWN:
                 #if the space key is pressed the simulation is started 
                 if event.key == pygame.K_SPACE:
-                    add_cells = 'n'
+                    add_cells = False
+                    simloop = True
                     #redraws the last cell after mouse hover is stopped
                     pygame.draw.rect(window,window_color,rect)
                     pygame.draw.rect(window,grid_color,rect,1)
 
                     #starts the simulation
-                    while phase1:
+                    while simloop:
                         tic = time.perf_counter()
                         for event in pygame.event.get():
                             if event.type == pygame.QUIT:
                                 pygame.quit()
                                 sys.exit()
+                            if event.type == pygame.KEYDOWN:
+                                if event.key == pygame.K_SPACE:
+                                    simloop = False
+                                    add_cells = True                                   
+
                         cell_changes(cells_added,boxsize,window_copy,cell_color,window_color,window)
                         window.blit(window_copy,window_rect) #displays window_copy on the display window
                         pygame.display.update() #updates the display
                         toc = time.perf_counter()
                         print(f"Generations per second = {1/(toc-tic)}")
-                        #time.sleep(0.3)
+                        if add_cells:
+                            for elem in cells_added:
+                                pygame.draw.rect(window_copy,window_color,elem)
+                                pygame.draw.rect(window_copy,grid_color,elem,1)
+                            cells_added.clear()
+                            drawGrid()
+                                       
+                        #time.sleep(1)
 
+            if event.type == pygame.KEYDOWN:    
                 if event.key == pygame.K_BACKSLASH:
                     # defining snake default position
                     snake_position = [150, 90]
@@ -162,7 +176,7 @@ def game():
                         pygame.quit()
                         quit()
 
-                    while phase1:
+                    while gameloop:
                         clock.tick(150)
                         for event in pygame.event.get():
                             if event.type == pygame.KEYDOWN:
