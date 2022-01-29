@@ -13,6 +13,7 @@ cells_added = [] #list to track added cells
 grid_rects = []
 
 from cell_logic import *
+from patterns import *
 
 
 def drawGrid(): #draws the grid and saves all the rects to grid_rect
@@ -95,6 +96,8 @@ def game():
                     pygame.draw.rect(window,window_color,rect)
                     pygame.draw.rect(window,grid_color,rect,1)
 
+            pattern(boxsize,window,cell_color,cells_added)
+                   
             if event.type == pygame.KEYDOWN:
                 #if the space key is pressed the simulation is started 
                 if event.key == pygame.K_SPACE:
