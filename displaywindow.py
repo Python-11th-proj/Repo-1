@@ -96,7 +96,8 @@ def game():
                     pygame.draw.rect(window,window_color,rect)
                     pygame.draw.rect(window,grid_color,rect,1)
 
-            pattern(boxsize,window,cell_color,cells_added)
+            def patterncaller():
+                pattern(boxsize,window,cell_color,cells_added)
                    
             if event.type == pygame.KEYDOWN:
                 #if the space key is pressed the simulation is started 
