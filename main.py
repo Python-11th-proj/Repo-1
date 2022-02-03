@@ -1,3 +1,5 @@
-from displaywindow import *
+
+from TKINTER import *
 
 game()
+
