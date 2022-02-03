@@ -33,7 +33,11 @@
     <Compile Include="TKINTER.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="pattern1.png" />
+    <Content Include="pattern2.png" />
+    <Content Include="pattern3.png" />
     <Content Include="patterns.py" />
+    <Content Include="Stop_sign.png" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|PythonCore|3.9" />
