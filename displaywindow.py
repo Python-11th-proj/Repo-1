@@ -12,7 +12,6 @@ cell_color = (230,230,230)
 cells_added = [] #list to track added cells
 grid_rects = []
 
-window = pygame.Surface(window_size)#makes the display window
 window_rect = window.get_rect() #getting rect(x,y,w,h) cords of the display surface(display window)
 window.fill(window_color)
 

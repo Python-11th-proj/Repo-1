@@ -1,5 +1,5 @@
 
-from TKINTER import *
+from maingui import *
 
 game()
 

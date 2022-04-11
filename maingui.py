@@ -155,8 +155,6 @@ class mainui():
     def exit(self):
         sys.exit()
 
-
-
 root = tk.Tk()
 root.attributes("-fullscreen",True)
 root.title("Conway's Game Of Life")
@@ -169,8 +167,6 @@ stopsign = tk.PhotoImage(file = "C:\\Users\\jeeva\\Source\\Repos\\Python-11th-pr
 
 heading_font = tkFont.Font(family="LEMON MILK light",size=50)
 button_font = tkFont.Font(family="LEMON MILK light",size=20)
-
-
 
 program = mainui(root)
 program.title_screen(root)

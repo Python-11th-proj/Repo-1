@@ -30,7 +30,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main.py" />
-    <Compile Include="TKINTER.py" />
+    <Compile Include="maingui.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="pattern1.png" />
