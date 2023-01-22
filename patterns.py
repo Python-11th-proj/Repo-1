@@ -1,9 +1,13 @@
 import pygame
+import csv
 from displaywindow import *
+
+with open("pattern.csv","r") as f:
+    data = list(csv.reader(f))
 
 
 def pattern1(boxsize,window,cell_color,cells_added):
-    glidergun = [[-75,1,0,-1,10,0,1,1,1,1,1,1,0,1,-1,-1,-2,-1,-1,-1,14,0,-2,-1,-1,0,1,0,-1,2,2,0,10,1,0,-1],[-40,0,1,0,0,-1,-1,-1,0,3,-2,1,1,0,1,1,1,0,-1,-1,0,-1,0,-1,0,-1,0,-1,0,-1,0,-1,2,0,1,0]]
+    glidergun = data[0]
 
     x=900
     y=450
@@ -16,7 +20,7 @@ def pattern1(boxsize,window,cell_color,cells_added):
         cells_added.append(rect)
 
 def pattern2(boxsize,window,cell_color,cells_added):
-    pulsar = [[0,1,1,4,1,1,2,0,0,0,0,0,-2,-1,-1,-4,-1,-1,-2,0,0,0,0,0,5,2,0,-2,0,2,0,-2,0,2,0,-2,-3,1,1,4,1,1,0,-1,-1,-4,-1,-1],[0,0,0,0,0,0,2,1,1,4,1,1,2,0,0,0,0,0,-2,-1,-1,-4,-1,-1,0,0,1,0,1,0,4,0,1,0,1,0,-5,0,0,0,0,0,2,0,0,0,0,0]]
+    pulsar = data[1]
 
     x=900
     y=450
@@ -29,7 +33,7 @@ def pattern2(boxsize,window,cell_color,cells_added):
         cells_added.append(rect)
 
 def pattern3(boxsize,window,cell_color,cells_added):
-    flyingmachine = [[-75,-1,2,0,1,-3,0,4,0,3,-7,1,1,1,3,2,-2,3,-9,1,1,1,3,2,-4,3,-7,4,-4,2,1,-3,2,-1],[0,1,0,1,0,1,1,0,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,1,1,0,1,0,1]]
+    flyingmachine = data[2]
 
     x=900
     y=450
